@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>python笔试面试题(一) | I am ~~蔚</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="I am ~~蔚">
+
+  
+  
+  
+
+  
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">I am ~~蔚</h1>
+            <h2 class="blog-description"><button id="showMenu">Show Menu</button></h2>
+        </div>
+    </div>
+</header>
+
+      
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-03-19T05:06:14.000Z" itemprop="datePublished">
+          2016-03-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/Python/'>Python</a>
+    
+    
+</span>
+    <h1 class="post-title">python笔试面试题(一)</h1>
+    <section class="post-content">
+      <hr>
+<h3 id="1-输出一个斐波那契数列"><a href="#1-输出一个斐波那契数列" class="headerlink" title="1. 输出一个斐波那契数列"></a>1. 输出一个斐波那契数列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> b &lt; <span class="number">100</span>:</span><br><span class="line">    <span class="keyword">print</span> b</span><br><span class="line">    <span class="keyword">print</span> a + b</span><br></pre></td></tr></table></figure>
+<h3 id="2-删除一个列表中重复的元素"><a href="#2-删除一个列表中重复的元素" class="headerlink" title="2. 删除一个列表中重复的元素"></a>2. 删除一个列表中重复的元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>]</span><br><span class="line">list(set(a))</span><br></pre></td></tr></table></figure>
+<h3 id="3-python-实现单例模式"><a href="#3-python-实现单例模式" class="headerlink" title="3. python 实现单例模式"></a>3. python 实现单例模式</h3><p><pre>单例设计模式目的是使类的一个对象成为系统中唯一的实例</pre><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用__metaclass__（元类）的高级python用法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleton2</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(cls, name, bases, dict)</span>:</span></span><br><span class="line">        super(singleton2, cls).__init__(name, bases, dict)</span><br><span class="line">        cls._instance = none</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> cls._instance <span class="keyword">is</span> none:</span><br><span class="line">            cls._instance = super(singleton2, cls).__call__(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myclass2</span><span class="params">(object)</span>:</span></span><br><span class="line">    __metaclass__ = singleton2</span><br><span class="line">one = myclass2()</span><br><span class="line">two = myclass2()</span><br><span class="line">two.a = <span class="number">3</span></span><br><span class="line"><span class="keyword">print</span> one.a</span><br><span class="line"><span class="keyword">print</span> id(one)</span><br><span class="line"><span class="keyword">print</span> id(two)</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-python-查询和替换一个文本字符串"><a href="#4-python-查询和替换一个文本字符串" class="headerlink" title="4.python 查询和替换一个文本字符串"></a>4.python 查询和替换一个文本字符串</h3><p><code>利用sub()函数</code><br>sub()的参数，一共五个,<br>其中三个必选参数：<strong>pattern, repl, string</strong><br>两个可选参数：<strong>count, flags</strong></p>
+<ul>
+<li><p>pattern(表示正则中的模式字符串)</p>
+<ul>
+<li>反斜杠加数字（\n），则对应着匹配的组（matched group）<ul>
+<li>比如\6，表示匹配前面pattern中的第6个group</li>
+<li>意味着，pattern中，前面肯定是存在对应的，第6个group，然后你后面也才能去引用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理字符串 hello world, the world is good!</span></span><br><span class="line"><span class="comment"># 两个world是一样的，将字符串改为china</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">inputstr = <span class="string">"hello world, the world is good!"</span></span><br><span class="line">relacestr = re.sub(<span class="string">r"hello (\w+), the \1"</span>, <span class="string">"china"</span>, inputstr)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"replacestr=%s"</span> % relacestr </span><br><span class="line"><span class="comment"># china is good!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>repl<br> repl，就是replacement，被替换，的字符串的意思。<br> repl可以是字符串，也可以是函数。</p>
+<ul>
+<li>如果repl是字符串的话，其中的任何反斜杠转义字符，都会被处理的。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取world</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">inputstr = <span class="string">"hello world, the world is good!"</span></span><br><span class="line">relacestr = re.sub(<span class="string">r"hello (\w+), the \1"</span>, <span class="string">"\g&lt;1&gt;"</span>, inputstr)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"replacestr=%s"</span> % relacestr</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>string</li>
+<li>count</li>
+<li>flags<br><a href="http://www.crifan.com/python_re_sub_detailed_introduction/" target="_blank" rel="external">sub()的详细解释</a></li>
+</ul>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>董炳蔚</h4>
+    <p>当你觉得累的时候，是因为你在人生上坡的路上</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-sina-weibo" href="http://v.t.sina.com.cn/share/share.php?title=当你觉得累的时候，是因为你在人生上坡的路上 ?url=http://yoursite.com/2016/03/19/python/" target="_blank">
+        <span class="hidden">weibo</span>
+    </a>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2016/03/19/python/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/03/19/python/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2016/03/19/python/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="icon-logo">•</span>
+    
+</nav>
+
+  <div id="comment" class="comments-area">
+    <h4 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h4>
+    
+</div>
+
+</main>
+
+
+      
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">I am ~~蔚</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+
+
+
+
+  </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
+</body>
+</html>
