@@ -51,8 +51,7 @@
 </span>
     <h1 class="post-title">PythonTip(一)</h1>
     <section class="post-content">
-      <h1 id="PythonTip-一"><a href="#PythonTip-一" class="headerlink" title="PythonTip(一)"></a>PythonTip(一)</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
+      <hr>
 <p>1、给你一个字符串 a， 如a=‘12345’，对a进行逆序输出a。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line">a = <span class="string">'123456'</span></span><br><span class="line">a = list(a)</span><br><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a[::<span class="number">-1</span>])</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">a = list(a)</span><br><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a.reverse())</span><br></pre></td></tr></table></figure></p>
 <p>2、 给你一字典a，如a={1:1,2:2,3:3}，输出字典a的key，以’,’链接，如‘1,2,3’。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">','</span>.join(a.keys())</span><br></pre></td></tr></table></figure></p>
 <p>3、给你一个字符串 a， 输出字符奇数位置的字符串。如a=‘12345’，则输出135<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a[::<span class="number">2</span>])</span><br></pre></td></tr></table></figure></p>
