@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>PythonTip(一) | I am ~~蔚</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="I am ~~蔚">
+
+  
+  
+  
+
+  
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">I am ~~蔚</h1>
+            <h2 class="blog-description"><button id="showMenu">Show Menu</button></h2>
+        </div>
+    </div>
+</header>
+
+      
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-03-27T07:26:59.000Z" itemprop="datePublished">
+          2016-03-27
+      </time>
+    
+</span>
+    <h1 class="post-title">PythonTip(一)</h1>
+    <section class="post-content">
+      <h1 id="PythonTip-一"><a href="#PythonTip-一" class="headerlink" title="PythonTip(一)"></a>PythonTip(一)</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>1、给你一个字符串 a， 如a=‘12345’，对a进行逆序输出a。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line">a = <span class="string">'123456'</span></span><br><span class="line">a = list(a)</span><br><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a[::<span class="number">-1</span>])</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">a = list(a)</span><br><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a.reverse())</span><br></pre></td></tr></table></figure></p>
+<p>2、 给你一字典a，如a={1:1,2:2,3:3}，输出字典a的key，以’,’链接，如‘1,2,3’。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">','</span>.join(a.keys())</span><br></pre></td></tr></table></figure></p>
+<p>3、给你一个字符串 a， 输出字符奇数位置的字符串。如a=‘12345’，则输出135<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">''</span>.join(a[::<span class="number">2</span>])</span><br></pre></td></tr></table></figure></p>
+<p>4、输出100以内的所有素数，素数之间以一个空格区分<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">nums = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">101</span>):</span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, i+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i % j == <span class="number">0</span>:</span><br><span class="line">            flag += <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> flag == <span class="number">2</span>:</span><br><span class="line">        nums.append(str(i))</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">' '</span>.join(nums)</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">print(<span class="string">'2 %s'</span> %  <span class="string">' '</span>.join(str(k) <span class="keyword">for</span> k <span class="keyword">in</span> [s <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>)[::<span class="number">2</span>] <span class="keyword">if</span> <span class="keyword">not</span> [y <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">2</span>,s) <span class="keyword">if</span> s%y == <span class="number">0</span>]][<span class="number">1</span>:]))</span><br></pre></td></tr></table></figure></p>
+<p>4、给你两个正整数a和b， 输出它们的最大公约数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 迭代法</span></span><br><span class="line">c = a % b</span><br><span class="line"><span class="keyword">while</span>(c):</span><br><span class="line">    a = b</span><br><span class="line">    b = c</span><br><span class="line">    c = a % b</span><br><span class="line"><span class="keyword">print</span> b</span><br></pre></td></tr></table></figure></p>
+<p>5、给你两个正整数a和b， 输出它们的最小公倍数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两数乘积除以最大公约数</span></span><br><span class="line">pro = a * b</span><br><span class="line">c = a % b</span><br><span class="line"><span class="keyword">while</span>(c):</span><br><span class="line">    a = b</span><br><span class="line">    b = c </span><br><span class="line">    c = a % b</span><br><span class="line"><span class="keyword">print</span> pro/b</span><br></pre></td></tr></table></figure></p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>董炳蔚</h4>
+    <p>当你觉得累的时候，是因为你在人生上坡的路上</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-sina-weibo" href="http://v.t.sina.com.cn/share/share.php?title=当你觉得累的时候，是因为你在人生上坡的路上 ?url=http://yoursite.com/2016/03/27/PythonTip-1/" target="_blank">
+        <span class="hidden">weibo</span>
+    </a>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2016/03/27/PythonTip-1/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/03/27/PythonTip-1/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2016/03/27/PythonTip-1/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="icon-logo">•</span>
+    
+    <a class="older-posts" href="/2016/03/21/leetcode-1/">
+        leetcode_NO1 →
+    </a>
+    
+</nav>
+
+  <div id="comment" class="comments-area">
+    <h4 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h4>
+    
+</div>
+
+</main>
+
+
+      
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">I am ~~蔚</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+
+
+
+
+  </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
+</body>
+</html>
