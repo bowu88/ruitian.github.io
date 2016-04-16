@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Manacher算法 | I am ~~蔚</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta name="generator" content="I am ~~蔚">
+
+  
+  
+  
+
+  
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body class="home-template">
+<div id="perspective" class="perspective effect-movedown">
+  <div class="container">
+    <!-- wrapper -->
+    <div class="wrapper">
+
+      <header class="site-head"  style="background: #24282b url(/img/img-bg.jpg) 0 -20%" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/logo.svg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">I am ~~蔚</h1>
+            <h2 class="blog-description"><button id="showMenu">Show Menu</button></h2>
+        </div>
+    </div>
+</header>
+
+      
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-04-16T07:25:06.000Z" itemprop="datePublished">
+          2016-04-16
+      </time>
+    
+</span>
+    <h1 class="post-title">Manacher算法</h1>
+    <section class="post-content">
+      <p>在求最长回文字串的时候，有一个神器就叫做 Manacher算法，俗称马拉车算法。</p>
+<h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><pre><code>这个算法要解决的就是一个字符串中最长的回文子串有多长。这个算法可以在O（n）的时间复杂度内既线性时间复杂度的情况下，求出以每个字符为中心的最长回文有多长，这个算法有一个很巧妙的地方，它把奇数的回文串和偶数的回文串统一起来考虑了。这一点一直是在做回文串问题中时比较烦的地方。这个算法还有一个很好的地方就是充分利用了字符匹配的特殊性，避免了大量不必要的重复匹配。
+</code></pre><h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><pre><code>先在每两个相邻字符中间插入一个分隔符，当然这个分隔符要在原串中没有出现过。一般可以用‘#’分隔。这样就非常巧妙的将奇数长度回文串与偶数长度回文串统一起来考虑了（见下面的一个例子，回文串长度全为奇数了），然后用一个辅助数组P记录以每个字符为中心的最长回文串的信息。P［id］记录的是以字符str［id］为中心的最长回文串，当以str［id］为第一个字符，这个最长回文串向右延伸了P［id］个字符。
+原串：    waabwswfd
+新串：       # w # a # a # b # w # s # w # f # d #
+辅助数组P：  1 2 1 2 3 2 1 2 1 2 1 4 1 2 1 2 1 2 
+这里有一个很好的性质，P［id］-1就是该回文子串在原串中的长度（包括‘#’）。
+</code></pre><h3 id="求P数组"><a href="#求P数组" class="headerlink" title="求P数组"></a>求P数组</h3><pre><code>现在的关键问题就在于怎么在O（n）时间复杂度内求出P数组了。只要把这个P数组求出来，最长回文子串就可以直接扫一遍得出来了。
+由于这个算法是线性从前往后扫的。那么当我们准备求P［i］的时候，i以前的P［j］我们是已经得到了的。我们用mx记在i之前的回文串中，延伸至最右端的位置。同时用id这个变量记下取得这个最优mx时的id值。（注：为了防止字符比较的时候越界，我在这个加了‘#’的字符串之前还加了另一个特殊字符‘$’，故我的新串下标是从1开始的）
+</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pk</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> mx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( mx &gt; i )</span><br><span class="line">            p[i] = MIN( p[<span class="number">2</span>*id-i], mx-i );        </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(; str[i+p[i]] == str[i-p[i]]; p[i]++)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">if</span>( p[i] + i &gt; mx )</span><br><span class="line">        &#123;</span><br><span class="line">            mx = p[i] + i;</span><br><span class="line">            id = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><pre><code>leetcode上的第五题，
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># @return a string</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        t = <span class="string">'$#'</span> + <span class="string">'#'</span>.join(s) + <span class="string">'#_'</span></span><br><span class="line">        p = [<span class="number">0</span>] * <span class="number">4010</span></span><br><span class="line">        mx, id, mmax, right = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(t) - <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> mx &gt; i:</span><br><span class="line">                p[i] = min(p[<span class="number">2</span> * id - i], mx - i)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                p[i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> t[i + p[i]] == t[i - p[i]]:</span><br><span class="line">                p[i] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> i + p[i] &gt; mx:</span><br><span class="line">                mx = i + p[i]</span><br><span class="line">                id = i</span><br><span class="line">            <span class="keyword">if</span> mmax &lt; p[i]:</span><br><span class="line">                mmax = p[i]</span><br><span class="line">                right = i</span><br><span class="line">        <span class="keyword">return</span> s[right//<span class="number">2</span> - mmax//<span class="number">2</span>: right//<span class="number">2</span> - mmax//<span class="number">2</span> + mmax - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># debug</span></span><br><span class="line">s = Solution()</span><br><span class="line"><span class="keyword">print</span> s.longestPalindrome(<span class="string">'ASBAASBAAA'</span>)</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>董炳蔚</h4>
+    <p>当你觉得累的时候，是因为你在人生上坡的路上</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-sina-weibo" href="http://v.t.sina.com.cn/share/share.php?title=当你觉得累的时候，是因为你在人生上坡的路上 ?url=http://yoursite.com/2016/04/16/Manacher-md/" target="_blank">
+        <span class="hidden">weibo</span>
+    </a>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2016/04/16/Manacher-md/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/04/16/Manacher-md/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2016/04/16/Manacher-md/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="icon-logo">•</span>
+    
+    <a class="older-posts" href="/2016/04/12/decorate/">
+        python装饰器入门学习 →
+    </a>
+    
+</nav>
+
+  <div id="comment" class="comments-area">
+    <h4 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h4>
+    
+</div>
+
+</main>
+
+
+      
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">I am ~~蔚</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+
+
+
+
+  </div>
+</div>
+
+<nav  class="outer-nav top horizontal">
+
+          <a class="icon-home"  href="/"><span>Home</span></a>
+
+          <a class="icon-news"  href="/archive"><span>Archive</span></a>
+
+          <a class="icon-image"  href="/images"><span>Images</span></a>
+
+          <a class="icon-Favorites"  href="/favorites"><span>Favorites</span></a>
+
+          <a class="icon-mail"  href="/about/2014-09-11-mabao/"><span>Contact</span></a>
+
+</nav>
+
+</div>
+</body>
+</html>
